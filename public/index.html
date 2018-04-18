@@ -1,0 +1,75 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<a class="twitter-timeline" 
+href="https://twitter.com/TwitterDev/timelines/539487832448843776?ref_src=twsrc%5Etfw">
+National Park Tweets - Curated tweets by TwitterDev</a> 
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8">
+</script>
+
+
+
+
+
+
+<div id="tweetsApp">
+    <input v-model="userName"  placeholder="Enter user screen name" />
+    <button v-on:click="getTweets(userName)">Search</button>
+    <div v-for="tweet in tweets">
+
+          
+
+
+
+          
+        <div>{{tweet.created_at}}</div><br>
+        <div>{{tweet.text}}</div><br>
+        <div>{{tweet.entities}}</div><br>
+        <div>{{tweet.screen_name}}</div>
+        <div>{{tweet.name}}</div>
+        <div>{{tweet.source}}</div>
+        <div>{{tweet.user}}</div>
+        <div>{{tweet.profile_background_color}}</div>
+        <div>{{tweet.profile_image_url}}</div>
+        <div>{{tweet.profile_image_url_https}}</div>
+        <div>{{tweet.description}}</div>
+        
+    </div>
+</div>
+  
+   
+   
+    
+<script>
+    debugger
+    var vm = new Vue({
+        el:'#tweetsApp',        
+        data:{
+            userName:'',
+            tweets:[]
+        },
+        methods:{
+            getTweets: function (userName) { 
+                var url = '/getTwitterData?userName='+ userName;
+                this.$http.get(url).then(response => {
+               // this.$http.get('/?userName=realDonaldTrump').then(response => {
+                        // success callback
+                        this.tweets = response.body;
+                        console.log(response);
+                        
+                    }, response => {
+                        // error callback   , {params: {userName:'Nazar'}}
+
+                    });              
+          
+            }
+        }
+       
+    });    
+    </script>
+    
+</html>
