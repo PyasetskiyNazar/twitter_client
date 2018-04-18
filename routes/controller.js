@@ -1,14 +1,12 @@
 var request = require('sync-request');
 var express = require('express');
-var oauth = require('oauth');
+var OAuth = require('oauth');
 var https = require('https');
 var util = require('util');
 
 var router = express.Router();
 
 function getTweets(userName, callback){
-
-//  callback([])
 
   var oauth = new OAuth.OAuth(
     'https://api.twitter.com/oauth/request_token',
