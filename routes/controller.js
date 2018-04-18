@@ -1,6 +1,6 @@
 var request = require('sync-request');
 var express = require('express');
-//var OAuth = require('OAuth');
+var oauth = require('oauth');
 var https = require('https');
 var util = require('util');
 
