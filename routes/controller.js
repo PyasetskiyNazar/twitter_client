@@ -8,36 +8,37 @@ var router = express.Router();
 
 function getTweets(userName, callback){
 
-  callback([])
-  // var oauth = new OAuth.OAuth(
-  //   'https://api.twitter.com/oauth/request_token',
-  //   'https://api.twitter.com/oauth/access_token',
-  //   '7z5FBYpvmnKfF06fgJ0JFZehU',
-  //   'oSkWwlWTzSwu2mmQGzJssOkyqWm17rdLeTd5d6fJsS5wZpjzav',
-  //   '1.0A',
-  //   null,
-  //   'HMAC-SHA1'
-  // );
-    
-  // oauth.get(
-  //   'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='+ userName +'&count=200',
-  //   '985057938086809600-jOaBRNxbJpgNQskx7VTKKzGGKxLnflT', 
-  //   'MAwRyPaVEgtupLwdPypwIXC0H0uxSnSNc91WYfqQHsMH8',       
-  //   function (e, data, res){
-      
-  //     if (e) console.error(e)
-      
-  //     var tweets = JSON.parse(data)
-  
-  //     var result = {
-  //       status: 'ok',
-  //       error: null,
-  //       tweets: tweets,
-  //       userName: userName
-  //     }
+//  callback([])
 
-  //     callback(tweets)      
-  //   });
+  var oauth = new OAuth.OAuth(
+    'https://api.twitter.com/oauth/request_token',
+    'https://api.twitter.com/oauth/access_token',
+    '7z5FBYpvmnKfF06fgJ0JFZehU',
+    'oSkWwlWTzSwu2mmQGzJssOkyqWm17rdLeTd5d6fJsS5wZpjzav',
+    '1.0A',
+    null,
+    'HMAC-SHA1'
+  );
+    
+  oauth.get(
+    'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='+ userName +'&count=200',
+    '985057938086809600-jOaBRNxbJpgNQskx7VTKKzGGKxLnflT', 
+    'MAwRyPaVEgtupLwdPypwIXC0H0uxSnSNc91WYfqQHsMH8',       
+    function (e, data, res){
+      
+      if (e) console.error(e)
+      
+      var tweets = JSON.parse(data)
+  
+      var result = {
+        status: 'ok',
+        error: null,
+        tweets: tweets,
+        userName: userName
+      }
+
+      callback(tweets)      
+    });
 
 }
 
