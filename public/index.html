@@ -1,0 +1,75 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Twitter Client</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+
+</head>
+
+<div id="tweetsApp">
+    <div class="input-data">
+            <input class="userName" v-model="userName" placeholder="Enter twitter user name"  />    
+            <button v-on:click="getTweets(userName)">Search tweets</button>
+    </div>
+    <br>
+    <div  class="tweet-item" v-for="tweet in tweets">
+            <div class="left-part">
+                <img :src="tweet.user.profile_image_url_https">
+            </div>
+        
+            <div id="right-part" class="right-part"></div>
+                <a href="#" ><b>{{tweet.user.name}}</b></a> 
+                
+                <span class="screen-name">@{{tweet.user.screen_name}}</span><br>
+                <span class="created-at">{{tweet.created_at}}</span>
+                <div>
+                        <p class="tweet-text">{{tweet.text}}</p>
+                </div>
+                   
+                <span class="retweet"><img src="/images/retweet.jpg">  {{tweet.retweet_count}}</span>
+                <span class="like"><img src="/images/like.jpg">  {{tweet.favorite_count}}</span>
+            </div>
+        </div>    
+</div>
+
+
+
+
+<script>    
+    var vm = new Vue({
+        el: '#tweetsApp',
+        data: {
+            userName: '',
+            tweets: []            
+        },
+        methods: {
+            getTweets: function (userName) {
+                if(userName == '')                    
+                    alert('Name required!')
+                else 
+                var url = '/getTwitterData?userName=' + userName;
+                this.$http.get(url).then(response => {
+                    if(response.body == "Bad request data!"){
+                        alert(response.body)
+                        this.userName = ''
+                    } else {
+                          // success callback
+                    this.tweets = response.body;
+                    this.userName = ''
+                    console.log(response.body); 
+                    }                                 
+                }, response => {
+                    // error callback
+                });
+            }
+        }
+    });    
+</script>
+
+</html>
