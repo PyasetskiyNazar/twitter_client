@@ -51,14 +51,17 @@
         },
         methods: {
             getTweets: function (userName) {
-                debugger                
                 if(userName == ''){                    
                     alert('Name required!')
                 } else {               
                     var url = '/getTwitterData?userName=' + userName;                                       
                 }
-                this.$http.get(url).then(response => {
 
+                var $this = this
+                
+                this.$http.get(url).then(response => {
+                    
+                    $this.userName = ''
                     var data = response.body
 
                     if(data.status == "error"){
@@ -75,7 +78,7 @@
         },
         computed:{
             pageUrl() {                              
-                return 'https://twitter.com/'+ this.userName;                
+                return 'https://twitter.com/'+ this.userName;  // link to user page              
             }
         }
     });        
