@@ -24,20 +24,26 @@ function getTweets(userName, callback){
     'MAwRyPaVEgtupLwdPypwIXC0H0uxSnSNc91WYfqQHsMH8',       
     function (e, data, res){
       
+      var tweets = null
+      var status = null
+      var error = null
+
       if (e) {
         console.error(e)
-        var tweets = null
+        error = e
+        status = 'error'
       } else {
+        status = 'ok'
         tweets = JSON.parse(data)
       }
 
       var result = {
-        status: 'ok',
-        error: null,
+        status: status,
+        error: error,
         tweets: tweets,
         userName: userName
       }
-      callback(tweets)      
+      callback(result)      
     });
 
   }
@@ -46,12 +52,8 @@ function getTweets(userName, callback){
 
     var userName = req.query.userName
 
-    getTweets(userName, function(tweets){
-      if(tweets == null){
-        res.send("Bad request data!")
-      } else {
-        res.json(tweets)
-      }      
+    getTweets(userName, function(data){     
+      res.json(data)           
   }) 
 })
 

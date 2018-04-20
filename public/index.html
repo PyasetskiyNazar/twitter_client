@@ -14,28 +14,29 @@
 
 <div id="tweetsApp">
     <div class="input-data">
-            <input class="userName" v-model="userName" placeholder="Enter twitter user name"  />    
+            <input class="inputName" v-model="userName" placeholder="Enter twitter user name"  />    
             <button v-on:click="getTweets(userName)">Search tweets</button>
     </div>
     <br>
     <div  class="tweet-item" v-for="tweet in tweets">
-            <div class="left-part">
-                <img :src="tweet.user.profile_image_url_https">
+        <div class="left-part">
+            <img :src="tweet.user.profile_image_url_https">
+        </div>
+    
+        <div  class="right-part"></div>
+            <a :href="pageUrl"><b>{{tweet.user.name}}</b></a> 
+            
+            <span class="screen-name">@{{tweet.user.screen_name}}</span><br>
+            <span class="created-at">{{tweet.created_at}}</span>
+            <div>
+                    <p class="tweet-text">{{tweet.text}}</p>
             </div>
-        
-            <div id="right-part" class="right-part"></div>
-                <a href="#" ><b>{{tweet.user.name}}</b></a> 
-                
-                <span class="screen-name">@{{tweet.user.screen_name}}</span><br>
-                <span class="created-at">{{tweet.created_at}}</span>
-                <div>
-                        <p class="tweet-text">{{tweet.text}}</p>
-                </div>
-                   
-                <span class="retweet"><img src="/images/retweet.jpg">  {{tweet.retweet_count}}</span>
-                <span class="like"><img src="/images/like.jpg">  {{tweet.favorite_count}}</span>
-            </div>
-        </div>    
+               
+            <span class="retweet"><img src="/images/retweet.jpg">  {{tweet.retweet_count}}</span>
+            <span class="like"><img src="/images/like.jpg">  {{tweet.favorite_count}}</span>                
+        </div>     
+
+    </div>               
 </div>
 
 
@@ -50,26 +51,34 @@
         },
         methods: {
             getTweets: function (userName) {
-                if(userName == '')                    
+                debugger                
+                if(userName == ''){                    
                     alert('Name required!')
-                else 
-                var url = '/getTwitterData?userName=' + userName;
+                } else {               
+                    var url = '/getTwitterData?userName=' + userName;                                       
+                }
                 this.$http.get(url).then(response => {
-                    if(response.body == "Bad request data!"){
-                        alert(response.body)
-                        this.userName = ''
+
+                    var data = response.body
+
+                    if(data.status == "error"){
+                        console.log(data.status);                        
+                        alert("Bad request data!")                        
                     } else {
-                          // success callback
-                    this.tweets = response.body;
-                    this.userName = ''
-                    console.log(response.body); 
-                    }                                 
-                }, response => {
-                    // error callback
-                });
+                        // success callback
+                        this.tweets = data.tweets
+                        this.status = data.status                    
+                        console.log(data.tweets);                         
+                    }                                                                 
+                }, response => { }) // error callback             
+            }
+        },
+        computed:{
+            pageUrl() {                              
+                return 'https://twitter.com/'+ this.userName;                
             }
         }
-    });    
+    });        
 </script>
 
 </html>

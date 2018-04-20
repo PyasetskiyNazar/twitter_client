@@ -9,7 +9,7 @@ a {
 .tweet-item {
   border: 1px solid #01060a;
   width: 600px; height: 200px; margin-left: 58px;
-  cursor: pointer;        
+          
   font-family: "Segoe UI",Arial,sans-serif;
   font-weight: bold;       
   border-color: #eee #ddd #bbb;
@@ -19,7 +19,7 @@ a {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   margin: 10px 5px;
   padding: 0 16px 6px 16px;       
-  margin:1 auto;
+  margin:15 auto;
 }
 .left-part { 
   width: 80px;
@@ -39,7 +39,7 @@ a {
   margin:10 auto;
   width:600px;
 }
-.userName{
+.inputName{
   width: 446px;  
 }
 button{
@@ -56,6 +56,7 @@ button{
   font-size: 16px; 
   font-weight: bold;
   line-height: 20px;
+  cursor: pointer;
 }
 .screen-name {
   color: #657786;
