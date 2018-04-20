@@ -14,7 +14,7 @@
 
 <div id="tweetsApp">
     <div class="input-data">
-            <input class="inputName" v-model="userName" placeholder="Enter twitter user name"  />    
+            <input class="inputName" v-model="userName" placeholder="Enter twitter user name"  v-on:keyup.enter="getTweets(userName)"  />
             <button v-on:click="getTweets(userName)">Search tweets</button>
     </div>
     <br>
