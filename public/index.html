@@ -8,9 +8,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">   
 
 </head>
+<body>
 
 <div id="tweetsApp">
     <div class="input-data">
@@ -38,50 +39,6 @@
 
     </div>               
 </div>
-
-
-
-
-<script>    
-    var vm = new Vue({
-        el: '#tweetsApp',
-        data: {
-            userName: '',
-            tweets: []            
-        },
-        methods: {
-            getTweets: function (userName) {
-                if(userName == ''){                    
-                    alert('Name required!')
-                } else {               
-                    var url = '/getTwitterData?userName=' + userName;                                       
-                }
-
-                var $this = this
-                
-                this.$http.get(url).then(response => {
-                    
-                    $this.userName = ''
-                    var data = response.body
-
-                    if(data.status == "error"){
-                        console.log(data.status);                        
-                        alert("Bad request data!")                        
-                    } else {
-                        // success callback                        
-                        this.tweets = data.tweets
-                        this.status = data.status                    
-                        console.log(data.tweets);                         
-                    }                                                                 
-                }, response => { }) // error callback             
-            }
-        },
-        computed:{
-            pageUrl() {                              
-                return 'https://twitter.com/'+ this.userName;  // link to user page              
-            }
-        }
-    });        
-</script>
-
+</body>
+<script src="/javascripts/vue-component.js"></script>
 </html>
