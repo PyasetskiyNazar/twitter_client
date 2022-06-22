@@ -1,19 +1,17 @@
 ﻿# twitter_client 
 
-Це веб-програма, яка відображає вкладку Timeline для даного користувача (ім'я користувача взято з текстового вводу).
-Повертає колекцію найновіших Твітів, опублікованих користувачем, вказаним параметрами screen_name. 
 
-Для доступу до Twitter API використано модуль OAuth 1.0. 
-Для Frontend використаний Vue.js, Backend виконаний на node.js  (express.js).
+This is a web application that displays the Timeline tab for this user (username taken from text input). Returns a collection of the latest Tweets posted by the user specified by the screen_name parameters.
 
-Для перегляду програми https://evening-dawn-59860.herokuapp.com/
+The OAuth 1.0 module is used to access the Twitter API. For Frontend Vue.js is used, Backend is executed on node.js (express.js).
 
-Запустити та розгорнути додаток:
+To view the program https://evening-dawn-59860.herokuapp.com/
 
-завнтажте архів --> https://github.com/PyasetskiyNazar/twitter_client.git
-Переконайтеся, що встановлено Node.js 
-	cd twitter_client
-	npm install
+Launch and deploy the application:
+
+download archive -> https://github.com/PyasetskiyNazar/twitter_client.git Make sure Node.js 
+	cd twitter_client 
+	npm install 
 	npm twitter_client
 
-Тепер ваш додаток має працювати на localhost:8888.
+Your application should now run on localhost: 8888.
