@@ -9,7 +9,9 @@ To view the program https://evening-dawn-59860.herokuapp.com/
 
 Launch and deploy the application:
 
-download archive -> https://github.com/PyasetskiyNazar/twitter_client.git Make sure Node.js 
+download archive -> https://github.com/PyasetskiyNazar/twitter_client.git 
+
+Make sure Node.js 
 	cd twitter_client 
 	npm install 
 	npm twitter_client
